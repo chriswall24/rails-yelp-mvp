@@ -1,0 +1,19 @@
+<h1>Write a Review for <%= @restaurant.name %></h1>
+
+<!-- by default, with just @review the form will submit to /reviews -->
+<!-- that doesn't exist! -->
+<!-- the place to submit is /restaurants/4/reviews -->
+<!-- the trick is to give the form helper an array in the order of that url -->
+<%= simple_form_for([@restaurant, @review]) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :content %>
+    <%= f.input :rating %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+<% end %>
